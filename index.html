@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>    
+<body>
+
+    <div class="page">
+
+        <header class="hero-section">
+            <div class="hero-badge">Date Tool</div>
+            <h1>Days Calculator</h1>
+            <p>Find the number of days between two dates in a clean and simple way.</p>
+        </header>
+
+        <main class="main-layout">
+
+            <section class="calculator-card">
+
+                <div class="card-heading">
+                    <h2>Select Dates</h2>
+
+                    <span>Step 1</span>
+                </div>
+
+                <div class="date-grid">
+
+                    <div class="date-box">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+
+                    <div class="date-box">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    
+                </div>
+
+                <div class="option-row">
+                    <label>
+                        <input type="checkbox" id="includeEndDate">
+                        Include end date in calculation
+                    </label>
+                </div>
+
+                <div class="button-row">
+                    <button id="calculateBtn">Calculate Days</button>
+                    <button id="clearBtn">Clear</button>
+                </div>
+
+                <div class="message-box" id="messageBox">
+                    Choose two dates to start.
+                </div>
+
+            </section>
+
+            <section class="result-card">
+
+                <div class="card-heading">
+                    <h2>Result</h2>
+                    <span>Step 2</span>
+                </div>
+
+                <div class="main-result">
+                    <span>Total Days</span>
+                    <strong id="totalDays">--</strong>
+                    <p id="resultText">Your result will appear here.</p>
+                </div>
+
+                <div class="mini-result-grid">
+
+                    <div class="mini-result">
+                        <span>Weeks</span>
+                        <strong id="weekResult">--</strong>
+                    </div>
+
+                    <div class="mini-result">
+                        <span>Months</span>
+                        <strong id="monthResult">--</strong>
+                    </div>
+
+                    <div class="mini-result">
+                        <span>Years</span>
+                        <strong id="yearResult">--</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="details-card">
+
+                <div class="card-heading">
+                    <h2>Date Details</h2>
+                    <span>Info</span>
+                </div>
+
+                <div class="details-grid">
+
+                    <div class="detail-box">
+                        <span>Start Day</span>
+                        <strong id="startDay">--</strong>
+                    </div>
+
+                    <div class="detail-box">
+                        <span>End Day</span>
+                        <strong id="endDay">--</strong>
+                    </div>
+
+                    <div class="detail-box">
+
+                        <span>Direction</span>
+                        <strong id="dateDirection">--</strong>
+                    </div>
+
+                    <div class="detail-box">
+                        <span>Status</span>
+                        <strong id="dateStatus">Waiting</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
