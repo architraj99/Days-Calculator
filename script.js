@@ -80,6 +80,41 @@ function validateDates() {
     return true;
 }
 
+function calculateDifference(start, end) {
+    let oneDay = 1000 * 60 * 60 * 24;
+
+    let difference = end.getTime() - start.getTime();
+
+    let finalDays = Math.floor(difference / oneDay);
+
+    if (includeEndDate.checked) {
+
+        finalDays = finalDays + 1;
+    }
+
+    return finalDays;
+}
+
+function updateMainResult(days) {
+
+    totalDays.innerText = days;
+
+    if (days === 0) {
+
+        resultText.innerText = "There is no difference between these dates.";
+    }
+
+    else if (days === 1) {
+
+        resultText.innerText = "There is 1 day difference between selected dates";
+    }
+    else {
+        
+        resultText.innerText = days + " Days were found between the selected the dates.";
+    }
+
+}
+
 calculateBtn.onclick = function () {
 
     let isValid = validateDates();
@@ -92,50 +127,42 @@ calculateBtn.onclick = function () {
 
     let end = new Date(endDate.value);
 
-    if (start.getTime() === end.getTime()) {
-
-        showMessage(
-            "Both selected dates are the same.",
-            "#dbeafe"
-        );
-
-        totalDays.innerText = "0";
-
-        resultText.innerText = "No difference between dates.";
-
-        dateDirection.innerText = "Same Date";
-
-        dateStatus.innerText = "Completed";
-
-    }
-    else if (start > end) {
-
-        showMessage(
-            "Start date is after the end date.",
-            "#fee2e2"
-        );
-
-        dateDirection.innerText = "Backward";
-
-        dateStatus.innerText = "Invalid Range";
-
-    }
-    else {
-
-        showMessage(
-            "Dates look good. Ready for calculation.",
-            "#dcfce7"
-        );
-
-        dateDirection.innerText = "Forward";
-
-        dateStatus.innerText = "Ready";
-
-    }
-
     startDay.innerText = getWeekDay(startDate.value);
 
     endDay.innerText = getWeekDay(endDate.value);
+
+    if (start > end) {
+
+        showMessage(
+            "Start date cannot after the end date.",
+            "#fee2e2"
+        );
+
+        resetResults();
+
+        dateDirection.innerText = "Backward";
+
+        dateStatus.innerText = "Invalid";
+
+        return;
+
+    }
+    
+    let totalDifference = calculateDifference(start, end);
+
+    updateMainResult(totalDifference);
+
+    if (totalDifference === 0) {
+
+        dateDirection.innerText = "Same Date";
+    }
+    else {
+        dateDirection.innerText = "Forward";
+    }
+
+    dateStatus.innerText = "Calculated";
+
+    showMessage("Date difference calculated successfully.", "#dcfce7");
 
 };
 
