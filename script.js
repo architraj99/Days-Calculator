@@ -55,8 +55,8 @@ function getWeekDay(dateValue) {
     let date = new Date(dateValue);
 
     let days = [
-        "Sunday", "Monday", "Tuesday", "Wednesday",
-        "Thursday","Friday","Saturday"
+        "Sunday", "Monday", "Tuesday","Wednesday",
+         "Thursday", "Friday", "Saturday"
     ];
 
     return days[date.getDay()];
@@ -81,6 +81,7 @@ function validateDates() {
 }
 
 function calculateDifference(start, end) {
+
     let oneDay = 1000 * 60 * 60 * 24;
 
     let difference = end.getTime() - start.getTime();
@@ -90,9 +91,11 @@ function calculateDifference(start, end) {
     if (includeEndDate.checked) {
 
         finalDays = finalDays + 1;
+
     }
 
     return finalDays;
+
 }
 
 function updateMainResult(days) {
@@ -101,17 +104,49 @@ function updateMainResult(days) {
 
     if (days === 0) {
 
-        resultText.innerText = "There is no difference between these dates.";
-    }
+        resultText.innerText =
+            "There is no difference between these dates.";
 
+    }
     else if (days === 1) {
 
-        resultText.innerText = "There is 1 day difference between selected dates";
+        resultText.innerText =
+            "There is 1 day difference between the selected dates.";
+
     }
     else {
-        
-        resultText.innerText = days + " Days were found between the selected the dates.";
+
+        resultText.innerText =
+            days + " days were found between the selected dates.";
+
     }
+
+}
+
+function updateBreakdown(days) {
+
+    let weeks = Math.floor(days / 7);
+
+    let remainingDays = days % 7;
+
+    let months = (days / 30.44).toFixed(1);
+
+    let years = (days / 365.25).toFixed(1);
+
+    if (weeks <= 0) {
+
+        weekResult.innerText = remainingDays + " Days";
+
+    }
+    else {
+
+        weekResult.innerText = weeks + "W " + remainingDays + "D";
+
+    }
+
+    monthResult.innerText = months;
+
+    yearResult.innerText = years;
 
 }
 
@@ -134,7 +169,7 @@ calculateBtn.onclick = function () {
     if (start > end) {
 
         showMessage(
-            "Start date cannot after the end date.",
+            "Start date cannot be after end date.",
             "#fee2e2"
         );
 
@@ -145,24 +180,31 @@ calculateBtn.onclick = function () {
         dateStatus.innerText = "Invalid";
 
         return;
-
     }
-    
+
     let totalDifference = calculateDifference(start, end);
 
     updateMainResult(totalDifference);
 
+    updateBreakdown(totalDifference);
+
     if (totalDifference === 0) {
 
         dateDirection.innerText = "Same Date";
+
     }
     else {
+
         dateDirection.innerText = "Forward";
+
     }
 
     dateStatus.innerText = "Calculated";
 
-    showMessage("Date difference calculated successfully.", "#dcfce7");
+    showMessage(
+        "Date difference calculated successfully.",
+        "#dcfce7"
+    );
 
 };
 
