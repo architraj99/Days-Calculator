@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Days Calculator</title>
     <link rel="stylesheet" href="style.css">
-</head>    
+</head>
 <body>
 
     <div class="page">
 
         <header class="hero-section">
-            <div class="hero-badge">Date Tool</div>
             <h1>Days Calculator</h1>
             <p>Find the number of days between two dates in a clean and simple way.</p>
         </header>
@@ -22,7 +21,6 @@
 
                 <div class="card-heading">
                     <h2>Select Dates</h2>
-
                     <span>Step 1</span>
                 </div>
 
@@ -37,7 +35,7 @@
                         <label for="endDate">End Date</label>
                         <input type="date" id="endDate">
                     </div>
-                    
+
                 </div>
 
                 <div class="option-row">
@@ -74,7 +72,7 @@
                 <div class="mini-result-grid">
 
                     <div class="mini-result">
-                        <span>Weeks</span>
+                        <span>Weeks & Days</span>
                         <strong id="weekResult">--</strong>
                     </div>
 
@@ -112,7 +110,6 @@
                     </div>
 
                     <div class="detail-box">
-
                         <span>Direction</span>
                         <strong id="dateDirection">--</strong>
                     </div>
@@ -120,6 +117,16 @@
                     <div class="detail-box">
                         <span>Status</span>
                         <strong id="dateStatus">Waiting</strong>
+                    </div>
+
+                    <div class="detail-box">
+                        <span>Start Date</span>
+                        <strong id="startFullDate">--</strong>
+                    </div>
+
+                    <div class="detail-box">
+                        <span>End Date</span>
+                        <strong id="endFullDate">--</strong>
                     </div>
 
                 </div>
@@ -131,6 +138,5 @@
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>

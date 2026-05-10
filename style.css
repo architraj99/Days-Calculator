@@ -75,7 +75,7 @@ body {
 }
 
 .details-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     margin-top: 16px;
 }
 
@@ -90,6 +90,12 @@ body {
     border-radius: 12px;
     border: 1px solid #cbd5e1;
     background: #f8fafc;
+}
+
+.date-box input:focus {
+    border-color: #4f46e5;
+    background: white;
+    outline: none;
 }
 
 .option-row {
@@ -113,6 +119,12 @@ button {
     padding: 12px;
     border-radius: 12px;
     cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
 }
 
 #calculateBtn {
@@ -140,6 +152,19 @@ button {
     border-radius: 18px;
     padding: 24px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-result::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    top: -40px;
+    right: -30px;
 }
 
 .main-result strong {
@@ -168,6 +193,11 @@ button {
     color: #64748b;
     font-size: 13px;
     margin-bottom: 6px;
+}
+
+.detail-box strong {
+    font-size: 18px;
+    line-height: 1.4;
 }
 
 @media (max-width: 800px) {

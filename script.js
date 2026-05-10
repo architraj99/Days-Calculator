@@ -20,6 +20,9 @@ let endDay = document.getElementById("endDay");
 let dateDirection = document.getElementById("dateDirection");
 let dateStatus = document.getElementById("dateStatus");
 
+let startFullDate = document.getElementById("startFullDate");
+let endFullDate = document.getElementById("endFullDate");
+
 function resetResults() {
 
     totalDays.innerText = "--";
@@ -40,6 +43,10 @@ function resetResults() {
 
     dateStatus.innerText = "Waiting";
 
+    startFullDate.innerText = "--";
+
+    endFullDate.innerText = "--";
+
 }
 
 function showMessage(text, color) {
@@ -55,11 +62,26 @@ function getWeekDay(dateValue) {
     let date = new Date(dateValue);
 
     let days = [
-        "Sunday", "Monday", "Tuesday","Wednesday",
-         "Thursday", "Friday", "Saturday"
+        "Sunday", "Monday", "Tuesday", "Wednesday", 
+        "Thursday", "Friday", "Saturday"
     ];
 
     return days[date.getDay()];
+
+}
+
+function formatFullDate(dateValue) {
+
+    let date = new Date(dateValue);
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
 
 }
 
@@ -121,6 +143,14 @@ function updateMainResult(days) {
 
     }
 
+    if (includeEndDate.checked) {
+
+        resultText.innerText =
+            resultText.innerText +
+            " End date was included.";
+
+    }
+
 }
 
 function updateBreakdown(days) {
@@ -135,12 +165,14 @@ function updateBreakdown(days) {
 
     if (weeks <= 0) {
 
-        weekResult.innerText = remainingDays + " Days";
+        weekResult.innerText =
+            remainingDays + " Days";
 
     }
     else {
 
-        weekResult.innerText = weeks + "W " + remainingDays + "D";
+        weekResult.innerText =
+            weeks + "W " + remainingDays + "D";
 
     }
 
@@ -165,6 +197,12 @@ calculateBtn.onclick = function () {
     startDay.innerText = getWeekDay(startDate.value);
 
     endDay.innerText = getWeekDay(endDate.value);
+
+    startFullDate.innerText =
+        formatFullDate(startDate.value);
+
+    endFullDate.innerText =
+        formatFullDate(endDate.value);
 
     if (start > end) {
 
