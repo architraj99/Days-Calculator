@@ -140,7 +140,7 @@ function updateMainResult(days) {
     else if (days === 1) {
 
         resultText.innerText =
-            "There is 1 day between the selected dates.";
+            "There is 1 day diiference between the selected dates.";
 
     }
     else {
@@ -334,13 +334,19 @@ todayBtn.onclick = function () {
 
 tomorrowBtn.onclick = function () {
 
-    let today = new Date();
+    let end = new Date();
 
-    today.setDate(today.getDate() + 1);
+    end.setDate(end.getDate() + 1);
 
-    startDate.value = formatInputDate(today);
+    if (startDate.value === "") {
 
-    endDate.value = formatInputDate(today);
+        let today = new Date();
+
+        startDate.value = formatInputDate(today);
+
+    }
+
+    endDate.value = formatInputDate(end);
 
 };
 
