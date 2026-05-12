@@ -5,6 +5,13 @@ let includeEndDate = document.getElementById("includeEndDate");
 let calculateBtn = document.getElementById("calculateBtn");
 let clearBtn = document.getElementById("clearBtn");
 
+let todayBtn = document.getElementById("todayBtn");
+let tomorrowBtn = document.getElementById("tomorrowBtn");
+let nextWeekBtn = document.getElementById("nextWeekBtn");
+let nextMonthBtn = document.getElementById("nextMonthBtn");
+
+let historyList = document.getElementById("historyList");
+
 let messageBox = document.getElementById("messageBox");
 
 let totalDays = document.getElementById("totalDays");
@@ -27,7 +34,7 @@ function resetResults() {
 
     totalDays.innerText = "--";
 
-    resultText.innerText = "Your result will appear here.";
+    resultText.innerText = "Your result will appear here";
 
     weekResult.innerText = "--";
 
@@ -62,7 +69,7 @@ function getWeekDay(dateValue) {
     let date = new Date(dateValue);
 
     let days = [
-        "Sunday", "Monday", "Tuesday", "Wednesday", 
+        "Sunday", "Monday", "Tuesday", "Wednesday",
         "Thursday", "Friday", "Saturday"
     ];
 
@@ -133,13 +140,13 @@ function updateMainResult(days) {
     else if (days === 1) {
 
         resultText.innerText =
-            "There is 1 day difference between the selected dates.";
+            "There is 1 day between the selected dates.";
 
     }
     else {
 
         resultText.innerText =
-            days + " days were found between the selected dates.";
+            days + " Days were found between the selected dates.";
 
     }
 
@@ -179,6 +186,52 @@ function updateBreakdown(days) {
     monthResult.innerText = months;
 
     yearResult.innerText = years;
+
+}
+
+function formatInputDate(date) {
+
+    return date.toISOString().split("T")[0];
+
+}
+
+function addHistory(start, end, days) {
+
+    let historyItem = document.createElement("div");
+
+    historyItem.className = "history-item";
+
+    historyItem.innerHTML =
+        `
+        <strong>${days} Days</strong>
+        <span>${start} → ${end}</span>
+        `;
+
+    if (historyList.children[0].className === "empty-history") {
+
+        historyList.innerHTML = "";
+
+    }
+
+    historyList.prepend(historyItem);
+
+    localStorage.setItem(
+        "daysHistory",
+        historyList.innerHTML
+    );
+
+}
+
+function loadHistory() {
+
+    let savedHistory =
+        localStorage.getItem("daysHistory");
+
+    if (savedHistory) {
+
+        historyList.innerHTML = savedHistory;
+
+    }
 
 }
 
@@ -226,6 +279,12 @@ calculateBtn.onclick = function () {
 
     updateBreakdown(totalDifference);
 
+    addHistory(
+        formatFullDate(startDate.value),
+        formatFullDate(endDate.value),
+        totalDifference
+    );
+
     if (totalDifference === 0) {
 
         dateDirection.innerText = "Same Date";
@@ -262,3 +321,55 @@ clearBtn.onclick = function () {
     resetResults();
 
 };
+
+todayBtn.onclick = function () {
+
+    let today = new Date();
+
+    startDate.value = formatInputDate(today);
+
+    endDate.value = formatInputDate(today);
+
+};
+
+tomorrowBtn.onclick = function () {
+
+    let today = new Date();
+
+    today.setDate(today.getDate() + 1);
+
+    startDate.value = formatInputDate(today);
+
+    endDate.value = formatInputDate(today);
+
+};
+
+nextWeekBtn.onclick = function () {
+
+    let today = new Date();
+
+    let nextWeek = new Date();
+
+    nextWeek.setDate(today.getDate() + 7);
+
+    startDate.value = formatInputDate(today);
+
+    endDate.value = formatInputDate(nextWeek);
+
+};
+
+nextMonthBtn.onclick = function () {
+
+    let today = new Date();
+
+    let nextMonth = new Date();
+
+    nextMonth.setMonth(today.getMonth() + 1);
+
+    startDate.value = formatInputDate(today);
+
+    endDate.value = formatInputDate(nextMonth);
+
+};
+
+loadHistory();
